@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">MagMarket</string>
+    <!--<string name="google_api_key">AIzaSyBOMF7gnsqTp28ED37iYEwJ9vTVOCVhcT4</string>-->
+
+    <string name="google_api_key">AIzaSyBrzuuAeZ8MKGtjMIJcPcu2jpM3pMcaII0</string>
+    <string name="google_debug_api_key">AIzaSyBFkTxMS-deIFXV2RhGpqTHn-EB34RE7oc</string>
+    <string name="google_release_api_key">AIzaSyBrzuuAeZ8MKGtjMIJcPcu2jpM3pMcaII0</string>
+    <string name="google_maps_key">AIzaSyB0TjZ0roTqNEbmA3cVwcFP_PWrHC7xkyM</string>
+
+    <!--<string name="google_release_api_key">AIzaSyAs6YeCj61X_Pvkj4nZDBx4af2ol7IuEk4</string>-->
+
+
+
+</resources>
