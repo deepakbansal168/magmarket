@@ -285,7 +285,7 @@ public class MainActivity extends Activity {
 
                     if (picBitmap != null){
                         String successMsg = "By uploading this image and proceeding you certify that you have place the magnet"
-                                + "on the vehicle in accordance with the Mag Markets terms of service. Do you agree?";
+                                + " on the vehicle in accordance with the Mag Markets terms of service. Do you agree?";
                         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

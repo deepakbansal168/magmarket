@@ -119,7 +119,7 @@ public class LocationService extends Service implements
                     try {
 
                          //   String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                        DateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd hhmmss");
+                        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                         dateFormatter.setLenient(false);
                         Date today = new Date();
                         String s = dateFormatter.format(today);
