@@ -64,7 +64,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         loadWebView();
 
-       checkpremission("location");
+    //   checkpremission("location");
+        Intent map=new Intent(MainActivity.this,MapActivity.class);
+        startActivity(map);
 
 
 
@@ -284,8 +286,7 @@ public class MainActivity extends Activity {
                     picBitmap = bmp;
 
                     if (picBitmap != null){
-                        String successMsg = "By uploading this image and proceeding you certify that you have place the magnet"
-                                + " on the vehicle in accordance with the Mag Markets terms of service. Do you agree?";
+                        String successMsg = "By uploading this image and proceeding you certify that you have placed the magnet on the vehicle in accordance with the MagMrkt terms of service.";
                         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

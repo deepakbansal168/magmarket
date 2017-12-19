@@ -64,9 +64,9 @@ import java.util.List;
 
 import im.delight.android.location.SimpleLocation;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback , GoogleApiClient.ConnectionCallbacks,
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener  {
+        LocationListener {
 
 
     String deviceID;
@@ -78,13 +78,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 
 
-
     Button back;
 
     ProgressDialog progressDialog;
     private double currentLatitude;
     private double currentLongitude;
-
 
 
     @Override
@@ -111,7 +109,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 //fourth line adds the LocationServices API endpoint from GooglePlayServices
                 .addApi(LocationServices.API)
                 .build();
-
 
 
         // Create the LocationRequest object
@@ -160,22 +157,24 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             return;
         }
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 
-        if (location == null) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        if (location != null) {
 
-        } else {
             //If everything went fine lets get latitude and longitude
             currentLatitude = location.getLatitude();
             currentLongitude = location.getLongitude();
+            Log.i("location", currentLatitude + " WORKS " + currentLongitude + "");
+            displaylocation();
+            // Toast.makeText(this, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
 
-            Toast.makeText(this, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
         }
     }
 
 
     @Override
-    public void onConnectionSuspended(int i) {}
+    public void onConnectionSuspended(int i) {
+    }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
@@ -216,21 +215,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onLocationChanged(Location location) {
         currentLatitude = location.getLatitude();
         currentLongitude = location.getLongitude();
-
+        displaylocation();
         //Toast.makeText(this, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
     }
 
 
     //region Action
 
-    public void  actionLog(View v){
+    public void actionLog(View v) {
         uploadLogsOnServer();
     }
 
     //endregion
 
 
-    public void uploadLogsOnServer(){
+    public void uploadLogsOnServer() {
 
         if (progressDialog == null)
             progressDialog = new ProgressDialog(this);
@@ -240,13 +239,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         progressDialog.show();
 
         new UploadImage().execute();
-      //  new MyAsyncTask().execute();
+        //  new MyAsyncTask().execute();
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        LatLng location = new LatLng(currentLatitude, currentLongitude);
         if (ActivityCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -257,17 +255,33 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        gMap=googleMap;
+        gMap = googleMap;
+        displaylocation();
+        //progressBar.setVisibility(View.GONE);
+    }
+
+    void displaylocation() {
+        LatLng location = new LatLng(currentLatitude, currentLongitude);
+        gMap.clear();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         gMap.setMyLocationEnabled(true);
         gMap.getUiSettings().setZoomControlsEnabled(true);
         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,13));
 
-        gMap.addMarker(new MarkerOptions()
-                .title("User")
-                .position(location));
-        //progressBar.setVisibility(View.GONE);
-    }
+//        gMap.addMarker(new MarkerOptions()
+//                .title("User")
+//                .position(location));
 
+    }
 
     private class UploadImage extends AsyncTask<String, String, String> {
 
@@ -306,18 +320,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             } else {
                // Toast.makeText(MapActivity.this, "File Does not Exist", Toast.LENGTH_SHORT).show();
             }
-
-//            try {
-//                JSONObject json=new JSONObject(response);
-//                String status=json.getString("status");
-//                if(status.equals("success")){
-//                    finish();
-//                    Toast.makeText(MapActivity.this, "File Uploaded!", Toast.LENGTH_LONG).show();
-//                }
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-            // Toast.makeText(Addphotovideo.this, "Image Uploaded!", Toast.LENGTH_LONG).show();
+            finish();
         }
     }
     private String uploadImage() {
