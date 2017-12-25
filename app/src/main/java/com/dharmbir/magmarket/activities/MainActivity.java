@@ -64,9 +64,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         loadWebView();
 
-    //   checkpremission("location");
-        Intent map=new Intent(MainActivity.this,MapActivity.class);
-        startActivity(map);
+       checkpremission("location");
+//        Intent map=new Intent(MainActivity.this,MapActivity.class);
+//        startActivity(map);
 
 
 
@@ -87,6 +87,8 @@ public class MainActivity extends Activity {
                             new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                             MY_PERMISSIONS_REQUEST_LOCATION);
                 }
+            }else{
+
             }
         }else if(which.equals("storage")){
             if (ContextCompat.checkSelfPermission(MainActivity.this,

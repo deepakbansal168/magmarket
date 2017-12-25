@@ -76,10 +76,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
-
-
     Button back;
-
     ProgressDialog progressDialog;
     private double currentLatitude;
     private double currentLongitude;
@@ -312,6 +309,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             File file=new File(myDirectory.getAbsolutePath()+"/"+"locationfile.txt");
             if(myDirectory.exists()){
               //  Toast.makeText(MapActivity.this, "Exist1", Toast.LENGTH_SHORT).show();
+                myDirectory.delete();
                 if (myDirectory.delete()) {
                //     Toast.makeText(MapActivity.this, "File Deleted", Toast.LENGTH_SHORT).show();
                 } else {
@@ -342,14 +340,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
         try {
-            // sending parameters
-            //   multiPart.addPart("tag", new StringBody("add_content"));
-//            multiPart.addPart("user_id", new StringBody(user_id));
-//            Log.e("tag", "user_id: "+user_id);
-//            multiPart.addPart("access_token", new StringBody(acces_token));
-//            Log.e("tag", "acces_token: "+acces_token);
-//            multiPart.addPart("caption", new StringBody(txtcaption.getText().toString().trim()));
-//            Log.e("tag", "caption: "+txtcaption.getText().toString().trim());
 
                 multiPart.addPart("userfile", new FileBody(sourceFile));
               //  multiPart.addPart("thumbnail", new FileBody(convertBitmapIntoFile(thumbnail, null)));
@@ -429,77 +419,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
-//    class MyAsyncTask extends AsyncTask<Void, Integer, String> {
-//        @Override
-//        protected String doInBackground(Void... params) {
-//
-//            String result = null;
-//
-//            try {
-//                result = fetchDataFromServer();
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
-//            return result;
-//        }
-//
-//        protected void onPostExecute(String result) {
-//            progressDialog.hide();
-//            if (result != null && result.length() != 0) {
-//                try {
-//
-//                    if (result.contains("Uploaded!")) {
-//
-//                        Utils.writeToFile("", MapActivity.this);
-//
-//                        String successMsg = "Log updated successfully";
-//
-//                        Toast.makeText(MapActivity.this, successMsg, Toast.LENGTH_LONG).show();
-//                        finish();
-//
-//                    }else{
-//                        Toast.makeText(MapActivity.this, "Sorry! Image not uploaded.", Toast.LENGTH_LONG).show();
-//                    }
-//
-//                } catch (Exception var3) {
-//                    Toast.makeText(MapActivity.this, "Server not responding, Please trg again.", Toast.LENGTH_LONG).show();
-//                    var3.printStackTrace();
-//                }
-//            }else{
-//                Toast.makeText(MapActivity.this, "Sorry! Image not uploaded.", Toast.LENGTH_LONG).show();
-//            }
-//            File myDirectory = new File(Environment.getExternalStorageDirectory(), "MagMarket");
-//            File file=new File(myDirectory.getAbsolutePath()+"/"+"locationfile.txt");
-//            if(file.exists()){
-//                Toast.makeText(MapActivity.this, "Exist1", Toast.LENGTH_SHORT).show();
-//                if (file.delete()) {
-//                    Toast.makeText(MapActivity.this, "File Deleted", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Toast.makeText(MapActivity.this, "File Not Deleted", Toast.LENGTH_SHORT).show();                }
-//            } else {
-//                Toast.makeText(MapActivity.this, "File Does not Exist", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//
-//        protected void onProgressUpdate(Integer... progress){
-//        }
-//
-//        public String fetchDataFromServer() throws IOException, JSONException {
-//
-//            String url = Constant.LOG_URL+deviceID;
-//
-//            String text = Utils.readFromFile(MapActivity.this);
-//            byte[] bytes = text.getBytes();
-//
-//            MultipartUtility ws   = new MultipartUtility(url, "UTF-8", "");
-//            ws.addFilePart("userfile", "location.txt", bytes);
-//            List<String> responseString = ws.finish();
-//
-//            return responseString.toString();
-//        }
-//    }
-
-    //endregion
 
 
 
