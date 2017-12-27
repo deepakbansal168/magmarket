@@ -309,12 +309,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             File file=new File(myDirectory.getAbsolutePath()+"/"+"locationfile.txt");
             if(myDirectory.exists()){
               //  Toast.makeText(MapActivity.this, "Exist1", Toast.LENGTH_SHORT).show();
-                myDirectory.delete();
-                if (myDirectory.delete()) {
-               //     Toast.makeText(MapActivity.this, "File Deleted", Toast.LENGTH_SHORT).show();
-                } else {
-               //     Toast.makeText(MapActivity.this, "File Not Deleted", Toast.LENGTH_SHORT).show();                }
-                }
+                file.delete();
             } else {
                // Toast.makeText(MapActivity.this, "File Does not Exist", Toast.LENGTH_SHORT).show();
             }

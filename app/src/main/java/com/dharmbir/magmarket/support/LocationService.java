@@ -133,7 +133,7 @@ public class LocationService extends Service implements
                             outStream = new FileOutputStream(newfile,true) ;
                             outStreamWriter = new OutputStreamWriter(outStream);
 
-                            outStreamWriter.append(location.getLatitude()+", "+location.getLongitude()+" "+s+" \n");
+                            outStreamWriter.append(location.getLatitude()+", "+location.getLongitude()+", "+s+" \n");
                             outStreamWriter.flush();
                         }
                         catch (IOException e) {
